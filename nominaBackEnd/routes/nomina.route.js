@@ -11,4 +11,6 @@ router.delete('/:idNomina', nominaController.deleteNominaById);
 
 router.put('/:idNomina', nominaController.updateNominaById);
 
+router.get('/:idAsesor', nominaController.findAllNominasByIdAsesor);
+
 module.exports = router;

@@ -9,7 +9,8 @@ async function createVenta (req,res) {
         fechaVenta: req.body.fechaVenta,
         nombre: req.body.nombre,
         valor: req.body.valor,
-        cliente: req.body.cliente
+        cliente: req.body.cliente,
+        idAsesor: req.body.idAsesor
     }
 
     dbManager.Venta.create(newVentaObject).then(
@@ -81,7 +82,8 @@ async function updateVentaById (req,res) {
         {   fechaVenta: req.body.fechaVenta,
             nombre: req.body.nombre,
             valor: req.body.valor,
-            cliente: req.body.cliente}, {
+            cliente: req.body.cliente,
+            idAsesor: req.body.idAsesor}, {
                 where: {
                     idVenta: idVenta
                 }
@@ -126,7 +128,36 @@ async function findVentaById (req,res) {
     } 
 }
 
+async function findAllVentasByIdAsesor (req,res) {
 
+    try {
+        //Execute query
+      
+        const {idAsesor} = req.params;
+        const ventas = await dbManager.Venta.findAll (
+            {
+                where: {
+                    idAsesor: idAsesor
+                }
+            }
+        );
+        
+        //Send response
+        res.json({
+                data: ventas
+        });
+
+    } catch (e) {
+        // Print error on console
+        console.log(e);
+        // Send error message as a response 
+        res.status(500).send({
+            message: "Some error occurred"
+        });
+    }
+}
+
+exports.findAllVentasByIdAsesor = findAllVentasByIdAsesor;
 exports.findVentaById = findVentaById;
 exports.updateVentaById = updateVentaById;
 exports.deleteVentaById = deleteVentaById;

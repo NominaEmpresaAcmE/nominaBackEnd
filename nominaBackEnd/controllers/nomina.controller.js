@@ -9,7 +9,8 @@ async function createNomina (req,res) {
         salarioNeto: req.body.salarioNeto,
         salud: req.body.salud,
         pension: req.body.pension,
-        riesgosLab: req.body.riesgosLab 
+        riesgosLab: req.body.riesgosLab,
+        idAsesor: req.body.idAsesor
     }
 
     dbManager.Nomina.create(newNominaObject).then(
@@ -82,7 +83,8 @@ async function updateNominaById (req,res) {
             salarioNeto: req.body.salarioNeto,
             salud: req.body.salud,
             pension: req.body.pension,
-            riesgosLab: req.body.riesgosLab}, {
+            riesgosLab: req.body.riesgosLab,
+            idAsesor: req.body.idAsesor}, {
                 where: {
                     idNomina: idNomina
                 }
@@ -127,6 +129,36 @@ async function findNominaById (req,res) {
     } 
 }
 
+async function findAllNominasByIdAsesor (req,res) {
+
+    try {
+        //Execute query
+      
+        const {idAsesor} = req.params;
+        const nominas = await dbManager.Nomina.findAll (
+            {
+                where: {
+                    idAsesor: idAsesor
+                }
+            }
+        );
+        
+        //Send response
+        res.json({
+                data: nominas
+        });
+
+    } catch (e) {
+        // Print error on console
+        console.log(e);
+        // Send error message as a response 
+        res.status(500).send({
+            message: "Some error occurred"
+        });
+    }
+}
+
+exports.findAllNominasByIdAsesor = findAllNominasByIdAsesor;
 exports.findNominaById = findNominaById;
 exports.updateNominaById = updateNominaById;
 exports.deleteNominaById = deleteNominaById;

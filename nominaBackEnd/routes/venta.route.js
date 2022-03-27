@@ -11,4 +11,6 @@ router.delete('/:idVenta', ventaController.deleteVentaById);
 
 router.put('/:idVenta', ventaController.updateVentaById);
 
+router.get('/:idAsesor', ventaController.findAllVentasByIdAsesor);
+
 module.exports = router;

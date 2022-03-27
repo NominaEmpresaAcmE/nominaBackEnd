@@ -7,7 +7,8 @@ async function createComision (req,res) {
     const newComisionObject = {
         tipoAsesor: req.body.tipoAsesor,
         meta: req.body.meta,
-        porcentaje: req.body.porcentaje
+        porcentaje: req.body.porcentaje,
+        idNomina: req.body.idNomina
     }
 
     dbManager.Comision.create(newComisionObject).then(
@@ -78,7 +79,8 @@ async function updateComisionById (req,res) {
     const comision = await dbManager.Comision.update(
         {   tipoAsesor: req.body.tipoAsesor,
             meta: req.body.meta,
-            porcentaje: req.body.porcentaje}, {
+            porcentaje: req.body.porcentaje,
+            idNomina: req.body.idNomina}, {
                 where: {
                     idComision: idComision
                 }
@@ -122,6 +124,37 @@ async function findComisionById (req,res) {
         });
     } 
 }
+
+async function findAllComisionesByIdNomina (req,res) {
+
+    try {
+        //Execute query
+      
+        const {idNomina} = req.params;
+        const comisiones = await dbManager.Comision.findAll (
+            {
+                where: {
+                    idNomina: idNomina
+                }
+            }
+        );
+        
+        //Send response
+        res.json({
+                data: comisiones
+        });
+
+    } catch (e) {
+        // Print error on console
+        console.log(e);
+        // Send error message as a response 
+        res.status(500).send({
+            message: "Some error occurred"
+        });
+    }
+}
+
+exports.findAllComisionesByIdNomina = findAllComisionesByIdNomina;
 exports.findComisionById = findComisionById;
 exports.updateComisionById = updateComisionById;
 exports.deleteComisionById = deleteComisionById;
