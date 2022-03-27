@@ -4,8 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var asesorRouter = require('./routes/asesor.route');
+var ventaRouter = require('./routes/venta.route');
+var comisionRouter = require ('./routes/comision.route');
+var nominaRouter = require ('./routes/nomina.route');
 
 var app = express();
 
@@ -35,7 +37,11 @@ dbManager.sequelizeConnection.authenticate()
   });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+pp.use('/asesor', asesorRouter);
+app.use('/venta', ventaRouter);
+app.use('/comision', comisionRouter);
+app.use('/nomina', nominaRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
