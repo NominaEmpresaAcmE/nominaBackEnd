@@ -9,8 +9,7 @@ module.exports = (sequelize, Sequelize) => {
         salarioNeto: Sequelize.INTEGER,
         salud: Sequelize.INTEGER,
         pension: Sequelize.INTEGER,
-        riesgosLab: Sequelize.INTEGER,
-        cliente: Sequelize.STRING
+        riesgosLab: Sequelize.INTEGER
 
         }, {
             tableName: "nominas"
