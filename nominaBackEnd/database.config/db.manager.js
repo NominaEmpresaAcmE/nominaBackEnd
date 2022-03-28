@@ -22,8 +22,8 @@ Venta.belongsTo (Asesor, {foreignKey: 'idAsesor', constraint: false});
 Asesor.hasMany (Nomina, {foreignKey: 'idNomina', constraints: false});
 Nomina.belongsTo (Asesor, {foreignKey: 'idAsesor', constraint: false});
 
-Nomina.hasMany (Comision, {foreignKey: 'idComision', constraints: false});
-Comision.belongsTo (Nomina, {foreignKey: 'idNomina', constraint: false});
+Comision.hasMany (Nomina, {foreignKey: 'idNomina', constraints: false});
+Nomina.belongsTo (Comision, {foreignKey: 'idComision', constraint: false});
 
 //GROUP MODELS
 const models = {

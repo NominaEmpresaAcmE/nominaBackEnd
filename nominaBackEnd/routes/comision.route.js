@@ -11,6 +11,4 @@ router.delete('/:idNomina', comisionController.deleteComisionById);
 
 router.put('/:idNomina', comisionController.updateComisionById);
 
-router.get('/:idNomina', comisionController.findAllComisionesByIdNomina);
-
 module.exports = router;

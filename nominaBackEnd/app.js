@@ -9,6 +9,8 @@ var ventaRouter = require('./routes/venta.route');
 var comisionRouter = require ('./routes/comision.route');
 var nominaRouter = require ('./routes/nomina.route');
 
+
+const cors = require('cors');
 var app = express();
 
 // view engine setup
@@ -20,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 const dbManager = require ("./database.config/db.manager");
 
@@ -36,8 +39,7 @@ dbManager.sequelizeConnection.authenticate()
     console.error('Unable to connect to the database:', err);
   });
 
-app.use('/', indexRouter);
-pp.use('/asesor', asesorRouter);
+app.use('/asesor', asesorRouter);
 app.use('/venta', ventaRouter);
 app.use('/comision', comisionRouter);
 app.use('/nomina', nominaRouter);

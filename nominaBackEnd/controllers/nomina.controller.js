@@ -10,7 +10,8 @@ async function createNomina (req,res) {
         salud: req.body.salud,
         pension: req.body.pension,
         riesgosLab: req.body.riesgosLab,
-        idAsesor: req.body.idAsesor
+        idAsesor: req.body.idAsesor,
+        idComision: req-body.idNomina
     }
 
     dbManager.Nomina.create(newNominaObject).then(
@@ -84,7 +85,8 @@ async function updateNominaById (req,res) {
             salud: req.body.salud,
             pension: req.body.pension,
             riesgosLab: req.body.riesgosLab,
-            idAsesor: req.body.idAsesor}, {
+            idAsesor: req.body.idAsesor,
+            idComision: req-body.idNomina}, {
                 where: {
                     idNomina: idNomina
                 }
